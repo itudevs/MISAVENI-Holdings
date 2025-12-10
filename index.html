@@ -8,6 +8,10 @@
     />
     <meta name="author" content="Misaveni Holdings" />
     <link rel="shortcut icon" href="favicon.png" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
 
     <meta
       name="description"
@@ -53,8 +57,6 @@
     />
     <link href="css/tiny-slider.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/services.css" />
-  	<link href="./css/externalstyles.css" rel="stylesheet" />
     <title>Misaveni Holdings | Mining, Industrial & Healthcare Supply Solutions</title>
   </head>
 
@@ -74,6 +76,7 @@
               style="width: 80px; border-radius: 10%"
               src="./images/LOGO_MH.jpg"
               alt="Misaveni Holdings"
+              decoding="async"
           /></a>
 
           <button
@@ -133,6 +136,8 @@
               class="d-block w-100"
               src="./images/slider-1.jpeg"
               alt="Industrial team working on construction site"
+              decoding="async"
+              fetchpriority="high"
             />
           </div>
           <div class="carousel-item">
@@ -140,6 +145,8 @@
               class="d-block w-100"
               src="./images/slider-2.jpg"
               alt="Mining operations equipment"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div class="carousel-item">
@@ -147,6 +154,8 @@
               class="d-block w-100"
               src="./images/slider-3.jpg"
               alt="Healthcare professionals collaborating"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -424,7 +433,7 @@
           <!-- Column !-->
           <div class="col-md-5">
             <!-- Image !-->
-            <figure class="text-center p-md-3 mb-0"><img class="img-fluid border-3" src="./images/CEO.png" alt="MISAVENI CEO" title=""/></figure>
+            <figure class="text-center p-md-3 mb-0"><img class="img-fluid border-3" src="./images/CEO.png" alt="MISAVENI CEO" title="" loading="lazy" decoding="async"/></figure>
           </div>
           <!-- Column !-->
           <div class="col-md-6 offset-md-1">
@@ -457,7 +466,7 @@
         <div class="row g-3 g-md-4 align-items-center">
           <!-- Column !-->
           <div class="col-md-5 border-5">
-            <figure class="text-center p-md-3 mb-0"><img class="img-fluid " src="./images/LOGO_MH.jpg" alt="" title=""/></figure>
+            <figure class="text-center p-md-3 mb-0"><img class="img-fluid " src="./images/LOGO_MH.jpg" alt="Misaveni Holdings logo" title="Misaveni Holdings" loading="lazy" decoding="async"/></figure>
           </div>
           <!-- Column !-->
           <div class="col-md-6 offset-md-1">
@@ -506,6 +515,8 @@
                   style="border-radius: 10%"
                   width="25%"
                   src="./images/LOGO_MH.jpg"
+                  loading="lazy"
+                  decoding="async"
               /></a>
             </div>
 
@@ -571,9 +582,8 @@
     </footer>
     <!-- End Footer Section -->
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/tiny-slider.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/slideshow.js"></script>
+    <script src="js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/tiny-slider.js" defer></script>
+    <script src="js/site.bundle.js" defer></script>
   </body>
 </html>
