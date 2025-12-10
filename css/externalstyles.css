@@ -1,0 +1,270 @@
+#vertex-section {
+  margin-top: 20px;
+}
+/* --------------------------------------------
+    ICON LIST
+-------------------------------------------- */
+
+#vertex-section ul.i-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+#vertex-section ul.i-list .list-title {
+  display: inline-block;
+  position: absolute;
+}
+
+#vertex-section ul.i-list li {
+  padding: 2px 0px;
+}
+
+#vertex-section ul.i-list i.fa {
+  margin-right: 7px;
+}
+
+#vertex-section ul.i-list .list-item {
+  margin-top: 3px;
+  display: inline-block;
+}
+
+#vertex-section ul.i-list.filled i.fa {
+  color: white;
+  font-size: 9px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+#vertex-section ul.e-icon-list.filled li {
+  padding: 2px 0px;
+  line-height: 24px;
+}
+
+#vertex-section ul.i-list.underline li {
+  padding: 6px 0px;
+  border-bottom: 1px solid #eee;
+}
+
+#vertex-section ul.i-list.medium li {
+  padding-bottom: 25px;
+  position: relative;
+}
+
+#vertex-section ul.i-list.medium .icon {
+  margin-right: 25px;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  line-height: 68px;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.28);
+  position: relative;
+  z-index: 1;
+  /*background-image: url(../img/crease.svg) !important;
+   -moz-background-size: 100% 100% !important;
+   background-size: 100% 100% !important;
+   background-position: center center !important;*/
+}
+
+#vertex-section ul.i-list.medium .icon i.fa {
+  margin: 0;
+}
+
+#vertex-section ul.i-list.medium.bordered .icon {
+  background: white;
+  color: inherit;
+  border: 2px solid #8fc135;
+  font-size: 26px;
+  color: #8fc135;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+#vertex-section ul.i-list.medium .list-item {
+  text-transform: uppercase;
+}
+
+#vertex-section ul.i-list.large .icon {
+  margin-right: 30px;
+  background: #d0d0d0;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  line-height: 80px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+#vertex-section ul.i-list.large .icon i.fa {
+  margin: 0;
+}
+
+#vertex-section ul.i-list.large.bordered .icon {
+  background: inherit;
+  color: inherit;
+  border: 2px solid #8fc135;
+  font-size: 30px;
+  color: #8fc135;
+}
+
+#vertex-section ul.i-list.large .list-item {
+  text-transform: uppercase;
+}
+
+#vertex-section ul.i-list .icon {
+  float: left;
+}
+
+#vertex-section ul.i-list.right {
+  text-align: right;
+}
+
+#vertex-section ul.i-list.right .icon {
+  float: right;
+}
+
+#vertex-section ul.i-list.right .icon {
+  float: right;
+  margin-right: 0;
+  margin-left: 25px;
+}
+
+#vertex-section ul.i-list.large.right .icon {
+  float: right;
+  margin-right: 0;
+  margin-left: 30px;
+}
+
+#vertex-section ul.i-list.large li {
+  margin-bottom: 25px;
+}
+
+#vertex-section ul.i-list .icon-content {
+  overflow: hidden;
+}
+
+#vertex-section ul.i-list .icon-content .title {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+#vertex-section .left-line .iconlist-timeline {
+  left: auto;
+  right: 35px;
+}
+
+#vertex-section .iconlist-timeline {
+  position: absolute;
+  top: 1%;
+  left: 32px;
+  width: 1px;
+  height: 99%;
+  border-right-width: 1px;
+  border-right-style: dashed;
+  height: 100%;
+  border-color: #ccc;
+}
+#vertex-section .icon {
+  background-color: #1f5c8f;
+}
+
+#vertex-section separator,
+#vertex-section .testimonial-two,
+#vertex-section .exp-separator-inner {
+  border-color: #1f5c8f;
+}
+#vertex-section .exp-separator {
+  border-color: #1f5c8f;
+  border-top-width: 2px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  width: 100%;
+  max-width: 55px;
+  border-top-style: solid;
+  height: auto;
+  clear: both;
+  position: relative;
+  z-index: 11;
+}
+#vertex-section .section-sub-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-family: Poppins;
+}
+#vertex-section .section-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 0.45em;
+  margin-bottom: 0.35em;
+  color: #303133;
+  font-family: Poppins;
+  letter-spacing: -0.02em;
+}
+#vertex-section .pb-20 {
+  padding-bottom: 20px !important;
+}
+#vertex-section .text-center {
+  text-align: center !important;
+}
+#vertex-section .center-separator .exp-separator-inner,
+#vertex-section .center-separator.exp-separator {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#vertex-section .values-row {
+  gap: 24px;
+}
+
+@media (min-width: 992px) {
+  #vertex-section .values-row {
+    justify-content: center;
+  }
+
+  #vertex-section .values-row > [class^="col-"],
+  #vertex-section .values-row > [class*=" col-"] {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
+
+.quote_ {
+  opacity: 0.1;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1;
+  width: auto;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 35px;
+  background: #000;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  display: block;
+}
+
+.slick-dots li {
+  margin: 0;
+}
+
+.slick-slider {
+  margin-bottom: 0 !important;
+}
+
+.slick-dots li button:before {
+  font-size: 1rem;
+}
