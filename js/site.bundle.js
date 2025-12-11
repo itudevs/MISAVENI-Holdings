@@ -312,3 +312,102 @@
     updateContainerHeight();
   });
 })();
+
+(function () {
+  "use strict";
+
+  var form = document.querySelector("#contact-form");
+
+  if (!form) {
+    return;
+  }
+
+  var statusNode = form.querySelector("[data-form-status]");
+  var submitting = false;
+
+  if (!statusNode) {
+    statusNode = document.createElement("div");
+    statusNode.className = "form-status small mt-3";
+    statusNode.setAttribute("data-form-status", "");
+    statusNode.setAttribute("role", "alert");
+    statusNode.setAttribute("aria-live", "polite");
+    form.appendChild(statusNode);
+  }
+
+  function setStatus(message, stateClass) {
+    if (!statusNode) {
+      return;
+    }
+
+    var classesToClear = ["text-success", "text-danger", "text-muted"];
+
+    for (var i = 0; i < classesToClear.length; i++) {
+      statusNode.classList.remove(classesToClear[i]);
+    }
+
+    if (stateClass) {
+      statusNode.classList.add(stateClass);
+    }
+
+    statusNode.textContent = message || "";
+  }
+
+  function submitForm(event) {
+    event.preventDefault();
+
+    if (submitting) {
+      return;
+    }
+
+    submitting = true;
+    setStatus("Sending...", "text-muted");
+
+    var formData = new FormData(form);
+
+    fetch(form.action, {
+      method: form.method || "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: formData,
+    })
+      .then(function (response) {
+        return response
+          .json()
+          .catch(function () {
+            return { success: response.ok };
+          })
+          .then(function (data) {
+            if (!response.ok || data.success === false) {
+              var error = new Error(
+                (data && data.message) ||
+                  "Submission failed. Please try again later."
+              );
+              error.data = data;
+              throw error;
+            }
+            return data;
+          });
+      })
+      .then(function (data) {
+        var message =
+          (data && data.message) ||
+          "Thanks for reaching out. We will contact you soon.";
+
+        setStatus(message, "text-success");
+        form.reset();
+      })
+      .catch(function (error) {
+        var message =
+          (error && error.message) ||
+          "Sorry, something went wrong. Please try again.";
+
+        setStatus(message, "text-danger");
+      })
+      .then(function () {
+        submitting = false;
+      });
+  }
+
+  form.addEventListener("submit", submitForm);
+})();

@@ -414,6 +414,10 @@ a {
     font-weight: 500;
     color: #44566c; }
 
+  .form-status {
+    min-height: 1.5rem;
+  }
+
   .services-overview {
     background: transparent; }
 
