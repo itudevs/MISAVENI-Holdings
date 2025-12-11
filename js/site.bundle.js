@@ -323,6 +323,7 @@
   }
 
   var statusNode = form.querySelector("[data-form-status]");
+  var fullNameInput = form.querySelector("[data-fullname-input]");
   var submitting = false;
 
   if (!statusNode) {
@@ -363,6 +364,34 @@
     setStatus("Sending...", "text-muted");
 
     var formData = new FormData(form);
+
+    if (fullNameInput) {
+      var firstField = form.querySelector('[name="firstname"]');
+      var lastField = form.querySelector('[name="lastname"]');
+      var nameParts = [];
+
+      if (firstField && firstField.value.trim()) {
+        nameParts.push(firstField.value.trim());
+      }
+
+      if (lastField && lastField.value.trim()) {
+        nameParts.push(lastField.value.trim());
+      }
+
+      var fullName = nameParts.join(" ").trim();
+
+      if (!fullName) {
+        fullName = (formData.get("email") || "").trim();
+      }
+
+      if (!fullName) {
+        fullName = "Website Visitor";
+      }
+
+      fullNameInput.value = fullName;
+      formData.set("name", fullName);
+      formData.set("from_name", fullName);
+    }
 
     fetch(form.action, {
       method: form.method || "POST",
