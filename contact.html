@@ -115,14 +115,10 @@
               </div>
 
               <form
-                id="contact-form"
-                action="https://api.web3forms.com/submit"
-                method="POST"
+              action="https://api.web3forms.com/submit" method="POST"
               >
 				<input type="hidden" name="access_key" value="9a54dd3c-d3db-4a8d-940e-2b399f97bf3e" />
-				<input type="hidden" name="subject" value="Misaveni Holdings Contact Form" />
-				<input type="hidden" name="name" value="" data-fullname-input />
-				<input type="checkbox" name="botcheck" class="d-none" tabindex="-1" autocomplete="off" />
+				<input type="hidden" name="redirect" value="http://127.0.0.1:5500/message-sent.html">
                 <div class="row">
                   <div class="col-6">
                     <div class="form-group">
@@ -142,7 +138,7 @@
                   <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
                 </div>
 
-				<div class="form-group">
+                <div class="form-group">
                   <label class="text-black" for="Subject">Subject</label>
                   <input type="text" class="form-control" id="subject" name="subject" placeholder="Contact Us" required>
                 </div>
@@ -268,13 +264,10 @@
     </footer>
     <!-- End Footer Section -->
 
-        <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-        <script src="js/sendemail.js"></script>
-		<script src="js/bootstrap.bundle.min.js" defer></script>
-		<script src="js/tiny-slider.js" defer></script>
-		<script src="js/site.bundle.js" defer></script>
+        
+    <script src="js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/tiny-slider.js" defer></script>
+    <script src="js/site.bundle.js" defer></script>
 		
 		
 	</body>
