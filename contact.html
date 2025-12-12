@@ -17,6 +17,7 @@
 		<link href="css/tiny-slider.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<title>Contact | Misaveni Holdings</title>
+		
 	</head>
 
 	<body>
@@ -113,8 +114,15 @@
                 </div>
               </div>
 
-              <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-				<input type="hidden" name="access_key" value="9a54dd3c-d3db-4a8d-940e-2b399f97bf3e">
+              <form
+                id="contact-form"
+                action="https://api.web3forms.com/submit"
+                method="POST"
+              >
+				<input type="hidden" name="access_key" value="9a54dd3c-d3db-4a8d-940e-2b399f97bf3e" />
+				<input type="hidden" name="subject" value="Misaveni Holdings Contact Form" />
+				<input type="hidden" name="name" value="" data-fullname-input />
+				<input type="checkbox" name="botcheck" class="d-none" tabindex="-1" autocomplete="off" />
                 <div class="row">
                   <div class="col-6">
                     <div class="form-group">
@@ -144,7 +152,7 @@
                   <textarea name="message" class="form-control" id="message" cols="30" rows="5" placeholder="How can we help you?" required></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-secondary text-white">Send Message</button>
+                <button type="submit"  class="btn btn-secondary text-white">Send Message</button>
                 <div class="form-status small mt-3" data-form-status role="alert" aria-live="polite"></div>
               </form>
 
@@ -260,10 +268,15 @@
     </footer>
     <!-- End Footer Section -->
 
-
-		<script src="js/bootstrap.bundle.min.js"></script>
-		<script src="js/tiny-slider.js"></script>
-		<script src="js/custom.js"></script>
+        <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+        <script src="js/sendemail.js"></script>
+		<script src="js/bootstrap.bundle.min.js" defer></script>
+		<script src="js/tiny-slider.js" defer></script>
+		<script src="js/site.bundle.js" defer></script>
+		
+		
 	</body>
 
 </html>
