@@ -1,39 +1,39 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 1. CONFIGURATION (Change these)
-    $recipient_email = "info@misaveniholdings.co.za"; // Where you want the mail sent
-    $from_email = "info@misaveniholdings.co.za"; // Must be an email created in your Truehost cPanel
-    
-    // 2. COLLECT DATA FROM YOUR FORM
-    $fname   = strip_tags(trim($_POST["firstname"]));
-    $lname   = strip_tags(trim($_POST["lastname"]));
-    $email   = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    $user_subject = strip_tags(trim($_POST["subject"]));
-    $message = htmlspecialchars($_POST["message"]);
+// 1. CONFIGURATION
+$recipient_email = "info@misaveniholdings.co.za"; 
+$from_email = "info@misaveniholdings.co.za"; 
 
-    // 3. PREPARE THE EMAIL CONTENT
-    $email_subject = "Website Contact: " . $user_subject;
-    
-    $email_body = "You have received a new message.\n\n".
-                  "Full Name: $fname $lname\n".
-                  "Email: $email\n".
-                  "Subject: $user_subject\n\n".
-                  "Message:\n$message";
+// 2. COLLECT DATA FROM YOUR FORM
+// We use $_REQUEST to ensure it grabs the data even if the security check is gone
+$fname   = strip_tags(trim($_REQUEST["firstname"] ?? ""));
+$lname   = strip_tags(trim($_REQUEST["lastname"] ?? ""));
+$email   = filter_var(trim($_REQUEST["email"] ?? ""), FILTER_SANITIZE_EMAIL);
+$user_subject = strip_tags(trim($_REQUEST["subject"] ?? "Contact"));
+$message = htmlspecialchars($_REQUEST["message"] ?? "");
 
-    // 4. HEADERS (Vital for Truehost to deliver the mail)
-    $headers = "From: $from_email" . "\r\n" .
-               "Reply-To: $email" . "\r\n" .
-               "X-Mailer: PHP/" . phpversion();
+// 3. PREPARE THE EMAIL CONTENT
+$email_subject = "Website Contact: " . $user_subject;
 
-    // 5. SENDING LOGIC
-    if (mail($recipient_email, $email_subject, $email_body, $headers)) {
-        // Success: Redirect to a 'thank you' page or show success
-        echo "<script>alert('Message sent successfully!'); window.location.href='index.html';</script>";
-    } else {
-        // Error
-        echo "<script>alert('Something went wrong. Please try again.'); window.history.back();</script>";
-    }
+$email_body = "You have received a new message.\n\n".
+              "Full Name: $fname $lname\n".
+              "Email: $email\n".
+              "Subject: $user_subject\n\n".
+              "Message:\n$message";
+
+// 4. HEADERS
+$headers = "From: $from_email" . "\r\n" .
+           "Reply-To: $email" . "\r\n" .
+           "X-Mailer: PHP/" . phpversion();
+
+// 5. SENDING LOGIC & REDIRECT
+if (mail($recipient_email, $email_subject, $email_body, $headers)) {
+    // Redirect to your custom success page
+    header("Location: message-sent.html");
+    exit();
 } else {
-    echo "Direct access not allowed.";
+    // If it fails, send them back to the contact page
+    // You can also change this to an error page if you prefer
+    header("Location: contact.html?error=Notsent");
+    exit();    
 }
 ?>
