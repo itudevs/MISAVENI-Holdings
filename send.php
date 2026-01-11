@@ -1,30 +1,37 @@
 <?php
-// 1. Configuration
-$recipient_email = "info@misaveniholdings.co.za"; 
-$from_email      = "info@misaveniholdings.co.za";   
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// 2. Get form data
-$fname   = $_POST['firstname'] ?? 'No First Name';
-$lname   = $_POST['lastname']  ?? 'No Last Name';
-$email   = $_POST['email']     ?? 'No Email';
-$subject = $_POST['subject']   ?? 'No Subject';
-$message = $_POST['message']   ?? 'No Message';
+require 'phpmailer/Exception.php';
+require 'phpmailer/PHPMailer.php';
+require 'phpmailer/SMTP.php';
 
-// 3. Format email
-$email_subject = "Website Contact: " . $subject;
-$email_body    = "Name: $fname $lname\nEmail: $email\n\nMessage:\n$message";
+$mail = new PHPMailer(true);
 
-$headers = "From: $from_email\n";
-$headers .= "Reply-To: $email\n";
-$headers .= "X-Mailer: PHP/" . phpversion();
+try {
+    // Server settings
+    $mail->isSMTP();
+    $mail->Host       = 'mail.misaveniholdings.co.za'; // Your Truehost Mail Server
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'info@misaveniholdings.co.za'; // Your cPanel email
+    $mail->Password   = '8W94Lb[mYg4!Gp';        // Your cPanel email password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port       = 465;
 
-// 4. Send and Redirect
-if (mail($recipient_email, $email_subject, $email_body, $headers, "-f$from_email")) {
-    // SUCCESS: Redirect to your thank you page
-    header("Location: success.html"); 
-    exit();
-} else {
-    // FAILURE: Redirect to an error page (optional) or show a simple message
-    echo "Something went wrong. Please try again or email us directly at $from_email";
+    // Recipients
+    $mail->setFrom('info@misaveniholdings.co.za', 'Website Form');
+    $mail->addAddress('your-personal-email@gmail.com'); 
+    $mail->addReplyTo($_POST['email'], $_POST['firstname']);
+
+    // Content
+    $mail->isHTML(false);
+    $mail->Subject = 'New Message: ' . $_POST['subject'];
+    $mail->Body    = "Name: " . $_POST['firstname'] . " " . $_POST['lastname'] . "\n" .
+                     "Email: " . $_POST['email'] . "\n\n" .
+                     "Message:\n" . $_POST['message'];
+
+    $mail->send();
+    echo "<script>window.location.href='success.html';</script>";
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
-?>
