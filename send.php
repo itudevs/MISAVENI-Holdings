@@ -14,7 +14,7 @@ try {
     $mail->Host       = 'mail.misaveniholdings.co.za'; // Your Truehost Mail Server
     $mail->SMTPAuth   = true;
     $mail->Username   = 'info@misaveniholdings.co.za'; // Your cPanel email
-    $mail->Password   = '8W94Lb[mYg4!Gp';        // Your cPanel email password
+    $mail->Password   = 'Misaveni@2026';        // Your cPanel email password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
