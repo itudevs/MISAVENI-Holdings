@@ -20,7 +20,7 @@ try {
 
     // Recipients
     $mail->setFrom('info@misaveniholdings.co.za', 'Website Form');
-    $mail->addAddress('your-personal-email@gmail.com'); 
+    $mail->addAddress('info@misaveniholdings.co.za'); 
     $mail->addReplyTo($_POST['email'], $_POST['firstname']);
 
     // Content
@@ -31,7 +31,7 @@ try {
                      "Message:\n" . $_POST['message'];
 
     $mail->send();
-    echo "<script>window.location.href='success.html';</script>";
+    echo "<script>window.location.href='message-sent.html';</script>";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
