@@ -1,43 +1,30 @@
-
-
-
-
 <?php
-// 1. CONFIGURATION
+// 1. Configuration
 $recipient_email = "info@misaveniholdings.co.za"; 
-$from_email = "info@misaveniholdings.co.za"; 
+$from_email      = "info@misaveniholdings.co.za";   
 
-// 2. COLLECT DATA FROM YOUR FORM
-// We use $_REQUEST to ensure it grabs the data even if the security check is gone
-$fname   = strip_tags(trim($_REQUEST["firstname"] ?? ""));
-$lname   = strip_tags(trim($_REQUEST["lastname"] ?? ""));
-$email   = filter_var(trim($_REQUEST["email"] ?? ""), FILTER_SANITIZE_EMAIL);
-$user_subject = strip_tags(trim($_REQUEST["subject"] ?? "Contact"));
-$message = htmlspecialchars($_REQUEST["message"] ?? "");
+// 2. Get form data
+$fname   = $_POST['firstname'] ?? 'No First Name';
+$lname   = $_POST['lastname']  ?? 'No Last Name';
+$email   = $_POST['email']     ?? 'No Email';
+$subject = $_POST['subject']   ?? 'No Subject';
+$message = $_POST['message']   ?? 'No Message';
 
-// 3. PREPARE THE EMAIL CONTENT
-$email_subject = "Website Contact: " . $user_subject;
+// 3. Format email
+$email_subject = "Website Contact: " . $subject;
+$email_body    = "Name: $fname $lname\nEmail: $email\n\nMessage:\n$message";
 
-$email_body = "You have received a new message.\n\n".
-              "Full Name: $fname $lname\n".
-              "Email: $email\n".
-              "Subject: $user_subject\n\n".
-              "Message:\n$message";
+$headers = "From: $from_email\n";
+$headers .= "Reply-To: $email\n";
+$headers .= "X-Mailer: PHP/" . phpversion();
 
-// 4. HEADERS
-$headers = "From: $from_email" . "\r\n" .
-           "Reply-To: $email" . "\r\n" .
-           "X-Mailer: PHP/" . phpversion();
-
-// 5. SENDING LOGIC & REDIRECT
-if (mail($recipient_email, $email_subject, $email_body, $headers)) {
-    // Redirect to your custom success page
-    header("Location: message-sent.html");
+// 4. Send and Redirect
+if (mail($recipient_email, $email_subject, $email_body, $headers, "-f$from_email")) {
+    // SUCCESS: Redirect to your thank you page
+    header("Location: success.html"); 
     exit();
 } else {
-    // If it fails, send them back to the contact page
-    // You can also change this to an error page if you prefer
-    header("Location: contact.html?error=Notsent");
-    exit();    
+    // FAILURE: Redirect to an error page (optional) or show a simple message
+    echo "Something went wrong. Please try again or email us directly at $from_email";
 }
-?> 
+?>
