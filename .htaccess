@@ -1,24 +1,24 @@
-# 1. Disable MultiViews to let RewriteEngine take control
 Options -MultiViews -Indexes
-
 RewriteEngine On
 RewriteBase /
 
-# 2. Redirect /page.html to /page (The "Browser Cleanup")
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
-RewriteRule ^ %1 [R=301,L]
+# 1. SPECIFIC RULE FOR INDEX -> HOME
+# If user types /index or /index.html, redirect them to /home
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(index|index\.html) [NC]
+RewriteRule ^ /home [R=301,L,NE]
 
-# 3. Internally map /page back to /page.html (The "Server Logic")
-RewriteCond %{REQUEST_FILENAME} !-f
+# Internally map /home back to index.html
+RewriteRule ^home$ index.html [L]
+
+# 2. GENERAL RULE FOR OTHER .HTML FILES
+# Redirect /anything.html to /anything (Cleanup)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# Internally map /anything back to anything.html
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^([^/]+)$ $1.html [L]
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^([^.]+)$ $1.html [NC,L]
 
-# 4. Same for PHP
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
-RewriteRule ^ %1 [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^/]+)$ $1.php [L]
+# 3. IGNORE PHP
+# We are not adding any rules for .php, so send.php will remain as is.

@@ -97,6 +97,27 @@ a {
       .custom-navbar .custom-navbar-cta li:first-child {
         margin-right: 20px; }
 
+.custom-navbar h1 {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin: 0;
+}
+
+.custom-navbar h1 a {
+  text-decoration: none;
+}
+
+@media (max-width: 576px) {
+  .custom-navbar h1 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-navbar h1 {
+    font-size: 1.3rem;
+  }
+}
+
 .hero {
   position: relative;
   background: #0e3a63;
