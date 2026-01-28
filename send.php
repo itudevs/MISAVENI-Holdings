@@ -9,7 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['email']) || empty($_POST['subject']) || empty($_POST['message'])) {
-    die('All fields are required');
+    $_SESSION['error_message'] = 'All fields are required';
+    header('Location: contact.php');
+    exit();
 }
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -30,11 +32,15 @@ try {
     $message = strip_tags(trim($_POST['message']));
     
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        throw new Exception('Invalid email address provided');
+        $_SESSION['error_message'] = 'Invalid email address provided';
+        header('Location: contact.php');
+        exit();
     }
     
     if (strlen($message) < 10) {
-        throw new Exception('Message is too short');
+        $_SESSION['error_message'] = 'Message is too short (minimum 10 characters)';
+        header('Location: contact.php');
+        exit();
     }
     
     // Calculate spam probability
@@ -200,9 +206,9 @@ try {
     
     error_log("FAILED: " . $mail->ErrorInfo . " | Exception: " . $e->getMessage());
     
-    // Return error message for JavaScript to display
-    http_response_code(400);
-    echo htmlspecialchars($e->getMessage());
+    // Store error message in session and redirect
+    $_SESSION['error_message'] = 'Failed to send message. Please try again later.';
+    header('Location: contact.php');
     exit();
 }
 ?>

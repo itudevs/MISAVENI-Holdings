@@ -18,7 +18,23 @@
 		<link href="css/tiny-slider.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<title>Contact | Misaveni Holdings</title>
-		
+		<style>
+			.error-message {
+				background-color: #f8d7da;
+				color: #721c24;
+				border: 1px solid #f5c6cb;
+				padding: 12px 20px;
+				border-radius: 5px;
+				margin-bottom: 20px;
+				font-size: 14px;
+				animation: fadeOut 4s forwards;
+				animation-delay: 3s;
+			}
+			@keyframes fadeOut {
+				from { opacity: 1; }
+				to { opacity: 0; visibility: hidden; }
+			}
+		</style>
 	</head>
 
 	<body>
@@ -50,7 +66,7 @@
 							<a class="nav-link" href="services.html">Services</a>
 						</li>
 						<li class="nav-item active">
-							<a class="nav-link" href="contact.html">Contact us</a>
+							<a class="nav-link" href="contact.php">Contact us</a>
 						</li>
 					</ul>
 				</div>
@@ -118,6 +134,10 @@
                 </div>
               </div>
 
+              <div id="error-container"></div>
+              
+              <div id="error-container"></div>
+              
               <form
               action="send.php" method="POST"
               >
@@ -216,7 +236,7 @@
                   </li>
                  
                   <li class="mb-2">
-                    <a style="color: white" href="./contact.html">Contact us</a>
+                    <a style="color: white" href="./contact.php">Contact us</a>
                   </li>
                 </ul>
               </div>
@@ -270,6 +290,36 @@
     <script src="js/bootstrap.bundle.min.js" defer></script>
     <script src="js/tiny-slider.js" defer></script>
     <script src="js/site.bundle.js" defer></script>
+		<script>
+			// Check for error message from PHP session
+			window.addEventListener('DOMContentLoaded', function() {
+				<?php
+				session_start();
+				if (isset($_SESSION['error_message'])) {
+					echo "var errorMessage = " . json_encode($_SESSION['error_message']) . ";";
+					unset($_SESSION['error_message']);
+				} else {
+					echo "var errorMessage = null;";
+				}
+				?>
+				
+				if (errorMessage) {
+					var errorContainer = document.getElementById('error-container');
+					var errorDiv = document.createElement('div');
+					errorDiv.className = 'error-message';
+					errorDiv.textContent = errorMessage;
+					errorContainer.appendChild(errorDiv);
+					
+					// Remove after 7 seconds
+					setTimeout(function() {
+						errorDiv.remove();
+					}, 7000);
+					
+					// Scroll to error message
+					errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				}
+			});
+		</script>
 		
 		
 	</body>
