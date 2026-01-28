@@ -187,11 +187,11 @@ try {
     $_SESSION['message_sent'] = true;
     $_SESSION['message_time'] = time();
     
-    // Clear buffer and return OK for AJAX
+    // Clear buffer and redirect
     ob_end_clean();
     
-    // Return 'OK' string that JavaScript expects
-    echo 'OK';
+    // Redirect to success page
+    header('Location: message-sent.html');
     exit();
     
 } catch (Exception $e) {
