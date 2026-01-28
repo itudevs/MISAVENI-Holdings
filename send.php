@@ -84,7 +84,7 @@ try {
     $mail->Priority = 3;
     
     // Critical headers
-    $mail->setFrom('info@misaveniholdings.co.za', 'AUSI Website');
+    $mail->setFrom('info@misaveniholdings.co.za', 'Misaveni Holdings Website');
     $mail->addAddress('info@misaveniholdings.co.za');
     $mail->addReplyTo('info@misaveniholdings.co.za', $name);
     
